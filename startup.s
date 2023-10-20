@@ -1,6 +1,7 @@
 .syntax unified 
+.extern _stack_top
 
-.text
+.section .vectors
 .arm
 .global _vectors
 _vectors:
@@ -22,10 +23,17 @@ _start:
 		mov r1, #0
 		mov r2, #0
 		mov r3, #0
-		mov sp, #400 // stack pointer
+		ldr sp, __stack_top // init stack pointer
 		bl main
 loop:
 		b loop
+
+.text 
+.align 2
+.global __stack_top
+.type __stack_top, %object
+__stack_top:
+		.word _stack_top
 
 .text
 .arm

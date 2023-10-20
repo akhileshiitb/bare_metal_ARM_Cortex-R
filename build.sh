@@ -6,7 +6,7 @@ arm-none-eabi-as -mthumb-interwork  -mcpu=cortex-r5  main.s  -o main.obj
 arm-none-eabi-as -mthumb-interwork  -mcpu=cortex-r5 startup.s  -o startup.obj
 
 # linking 
-arm-none-eabi-ld -o image.elf --entry=_start -Ttext 0x0 -Tdata 0x20000000 -Map image.map startup.obj  main.obj
+arm-none-eabi-ld -o image.elf --entry=_start --script linker.cmd  -Map image.map startup.obj  main.obj
 
 
 # objdump .. for binary creation 
